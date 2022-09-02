@@ -51,11 +51,26 @@ refer k6-crd-testjs.yaml
 Deploy the custom resource (CR):
 --------------------------------
 
-kubectl apply -f k6-crd-testjs.yaml
+kubectl apply -n k6-load -f k6-crd-testjs.yaml
 
 
 Make sure everything went as expected:
 --------------------------------------
 
-kubectl get k6 
+kubectl get k6 -n k6-load
 
+kubectl get jobs -n k6-load
+
+kubectl get pods -n k6-load
+
+
+To make sure, we can check the logs of one of the jobs:
+------------------------------------------------------
+
+kubectl logs k6-sample-1-btxwz -n k6-load
+
+
+Cleaning up:
+------------
+
+kubectl delete -n k6-load -f k6-crd-testjs.yaml
